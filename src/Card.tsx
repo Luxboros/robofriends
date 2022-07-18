@@ -10,7 +10,7 @@ export const Card: React.FC<User> = ({
   email,
 }: User) => {
   const set: number = Math.round(Math.random() * 6 + 1)
-  const src: string = `https://robohash.org/${ username }?set=set${ set }`
+  const src: string = `https://robohash.org/${ username }?set=set${ set }&size=180x180`
 
   const width: number = 200
   const height: number = 200
@@ -22,6 +22,7 @@ export const Card: React.FC<User> = ({
                        borderRadius: '20px',
                        margin: '$xs',
                        width: 300,
+
                      } }
   >
 
@@ -31,9 +32,27 @@ export const Card: React.FC<User> = ({
       height,
     } } css={ {
       padding: 5,
+      '&:hover': {
+        scale: 1.15,
+      },
     } } showSkeleton alt="Provided by robohash.org"/>
-    <Text size={ 30 } weight="bold">{ username }</Text>
-    <Text size={ 25 } weight="semibold">{ name }</Text>
-    <Text size={ 20 }>{ email }</Text>
+    <Text css={ {
+      '&:hover': {
+        color: '$purple800',
+        scale: 1.1,
+      },
+    } } size={ 30 } weight="bold">{ username }</Text>
+    <Text css={ {
+      '&:hover': {
+        color: '$purple800',
+        scale: 1.1,
+      },
+    } } size={ 25 } weight="semibold">{ name }</Text>
+    <Text css={ {
+      '&:hover': {
+        color: '$purple800',
+        scale: 1.1,
+      },
+    } } size={ 20 }>{ email }</Text>
   </Container>)
 }

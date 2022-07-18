@@ -1,6 +1,7 @@
 import { Container, Text } from '@nextui-org/react'
 import { atom, useAtom } from 'jotai'
 import React, { useEffect } from 'react'
+import './App.css'
 import { CardList } from './CardList'
 import { SearchBox } from './SearchBox'
 
@@ -45,10 +46,7 @@ function App () {
     css={ {
       textAlign: 'center',
       backgroundColor: ' $purple50 ',
-      height: '100%',
-      minHeight: '100vh',
-      padding: '0',
-      margin: 'auto',
+
     } }>
     <Text h1 size={ 60 }
           css={ {

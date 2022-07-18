@@ -1,0 +1,7 @@
+html, body, #root {
+	background-color: rgba(247, 242, 253, 1);
+	height: 100%;
+	margin: auto;
+	min-height: 100vh;
+	padding: 0;
+}
