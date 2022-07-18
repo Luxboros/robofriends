@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Card } from "./Card";
+import { Container, Text } from '@nextui-org/react'
+import { atom, useAtom } from 'jotai'
+import React, { useEffect } from 'react'
+import { CardList } from './CardList'
+import { SearchBox } from './SearchBox'
 
 
 export interface User {
@@ -9,24 +12,54 @@ export interface User {
   username: string;
 }
 
-function App() {
-  const [ robots, setRobots ] = useState( [] as User[] );
-  useEffect( () => {
-    fetch( "https://jsonplaceholder.typicode.com/users" ).then( response => response.json() ).then( data => data.map( ( {
-      id,
-      name,
-      email,
-      username
-    }: User ) => ({
-      id,
-      name,
-      email,
-      username
-    }) ) ).then( ( data: User[] ) => setRobots( data ) );
-  }, [] );
+export const usersAtom = atom([] as User[])
 
+function App () {
+  const [users, setUsers] = useAtom(usersAtom)
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => data.map(({
+        id,
+        name,
+        email,
+        username,
+      }: User) => ({
+        id,
+        name,
+        email,
+        username,
+      })))
+      .then((data: User[]) => {
+        setUsers(data)
+      })
+  }, [])
 
-  return (robots.length ? <div> { robots.map( ( user: User ) => <Card key={ user.id } { ...user }/> ) }</div> : <div>Loading...</div>);
+  return (<Container
+    display="flex"
+    direction="column"
+    alignContent="center"
+    alignItems="center"
+    justify="flex-start"
+    wrap="nowrap"
+    css={ {
+      textAlign: 'center',
+      backgroundColor: ' $purple50 ',
+      height: '100%',
+      minHeight: '100vh',
+      padding: '0',
+      margin: 'auto',
+    } }>
+    <Text h1 size={ 60 }
+          css={ {
+            textGradient: '45deg, $purple600 -20%, $pink600 100%',
+            padding: '3rem',
+          } }
+          weight="bold"> Robofriends </Text>
+    <SearchBox/>
+    <CardList/>
+  </Container>)
+
 }
 
-export default App;
+export default App
